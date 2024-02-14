@@ -42,8 +42,6 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -53,13 +51,6 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-      
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8609C6FB907C413CAA28B51D694018A0 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3DB74F5B8DEE495C85F48F96623F323C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_77AB02B66F50479EA117D04053A2846B }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -67,5 +58,5 @@ jobs:
         with:
           app-name: 'bysmax-store'
           slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_52AA466A42BD4FA79D0143BCD40F0D72 }}
           package: .
-          
