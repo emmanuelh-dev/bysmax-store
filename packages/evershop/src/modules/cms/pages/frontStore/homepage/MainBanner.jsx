@@ -13,11 +13,6 @@ export default function MainBanner() {
         <div />
         <div className="text-center md:text-left px-2 ">
           <h2 className="h1 ">{text}</h2>
-          <p>
-            Use coupon code
-            <span className="font-bold">DISCOUNT20</span>
-          </p>
-          <p>{_('Use coupon ${coupon}', { coupon: 'DISCOUNT20' })}</p>
           <p />
         </div>
       </div>
